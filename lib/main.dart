@@ -16,9 +16,13 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: Text('Transaction App'),
+          actions: <Widget>[
+            IconButton(icon: Icon(Icons.add), onPressed: () {})
+          ],
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -35,6 +39,9 @@ class _MyAppState extends State<MyApp> {
               UserTransactions()
             ],
           ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
         ),
       ),
     );
