@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 
-class TransactionAdd extends StatelessWidget {
+class TransactionAdd extends StatefulWidget {
   final Function addHandler;
-  final itemController = TextEditingController();
-  final amountController = TextEditingController();
 
   TransactionAdd(this.addHandler);
+
+  @override
+  _TransactionAddState createState() => _TransactionAddState();
+}
+
+class _TransactionAddState extends State<TransactionAdd> {
+  final itemController = TextEditingController();
+
+  final amountController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +25,8 @@ class TransactionAdd extends StatelessWidget {
         return;
       }
 
-      addHandler(enterdItem, enterdAmount);
+      widget.addHandler(enterdItem, enterdAmount);
+      Navigator.of(context).pop();
     }
 
     return Container(
