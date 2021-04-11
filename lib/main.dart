@@ -15,8 +15,19 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           primarySwatch: Colors.green,
+          textTheme: ThemeData.light().textTheme.copyWith(
+              title: TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18)),
+          appBarTheme: AppBarTheme(
+              textTheme: ThemeData.light().textTheme.copyWith(
+                  title: TextStyle(
+                      fontFamily: 'OpenSans',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20))),
           accentColor: Colors.amber,
-          fontFamily: "OpenSans-regular"),
+          fontFamily: "OpenSans"),
       title: "Financiën",
       home: MyHomePage(),
     );
@@ -30,12 +41,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _transactions = [
-    Transaction(
-        id: 't1', item: 'Schoenen', amount: 69.99, date: DateTime.now()),
-    Transaction(
-        id: 't2', item: 'Boodschappen', amount: 9.56, date: DateTime.now()),
-    Transaction(
-        id: 't3', item: 'Computer', amount: 1000.00, date: DateTime.now()),
+    // Transaction(
+    //     id: 't1', item: 'Schoenen', amount: 69.99, date: DateTime.now()),
+    // Transaction(
+    //     id: 't2', item: 'Boodschappen', amount: 9.56, date: DateTime.now()),
+    // Transaction(
+    //     id: 't3', item: 'Computer', amount: 1000.00, date: DateTime.now()),
   ];
 
   void _addTransaction(String txItem, double txAmount) {
@@ -90,6 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () => _startAddNewTransaction(context),
