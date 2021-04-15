@@ -29,34 +29,37 @@ class _TransactionAddState extends State<TransactionAdd> {
       Navigator.of(context).pop();
     }
 
-    return Container(
-      padding: EdgeInsets.all(10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Container(
-            child: TextField(
-              decoration: InputDecoration(labelText: 'Title'),
-              controller: itemController,
-              onSubmitted: (_) => submitData(),
+    return SingleChildScrollView(
+      child: Container(
+        height: 350,
+        padding: EdgeInsets.all(10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Container(
+              child: TextField(
+                decoration: InputDecoration(labelText: 'Title'),
+                controller: itemController,
+                onSubmitted: (_) => submitData(),
+              ),
             ),
-          ),
-          Container(
-            child: TextField(
-              decoration: InputDecoration(labelText: 'Amount'),
-              controller: amountController,
-              keyboardType: TextInputType.number,
-              onSubmitted: (_) => submitData(),
+            Container(
+              child: TextField(
+                decoration: InputDecoration(labelText: 'Amount'),
+                controller: amountController,
+                keyboardType: TextInputType.number,
+                onSubmitted: (_) => submitData(),
+              ),
             ),
-          ),
-          FlatButton(
-            onPressed: () => submitData(),
-            child: Text(
-              'Add transaction',
-              style: TextStyle(color: Colors.purple),
+            FlatButton(
+              onPressed: () => submitData(),
+              child: Text(
+                'Add transaction',
+                style: TextStyle(color: Colors.purple),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

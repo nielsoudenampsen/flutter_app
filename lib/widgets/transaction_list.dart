@@ -30,40 +30,11 @@ class TransactionList extends StatelessWidget {
           : ListView.builder(
               itemCount: transactions.length,
               itemBuilder: (ctx, index) {
-                return Card(
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        child: Text(
-                          '\$ ${transactions[index].amount.toStringAsFixed(2)}',
-                          style: TextStyle(
-                              color: Theme.of(context).primaryColor,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        margin:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                        padding: EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                color: Theme.of(context).primaryColor,
-                                width: 2)),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(transactions[index].item,
-                              style: Theme.of(context).textTheme.title),
-                          Text(
-                            DateFormat.yMMMd().format(transactions[index].date),
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 13,
-                                color: Colors.grey),
-                          ),
-                        ],
-                      )
-                    ],
+                return ListTile(
+                  title: Text('\$${transactions[index].item}'),
+                  leading: CircleAvatar(
+                    child: Text('${transactions[index].amount}'),
+                    radius: 30,
                   ),
                 );
               },
