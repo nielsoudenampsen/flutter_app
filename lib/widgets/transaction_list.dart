@@ -4,12 +4,13 @@ import 'package:intl/intl.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
-  TransactionList(this.transactions);
+  final Function delete;
+  TransactionList(this.transactions, this.delete);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
+      height: 450,
       child: transactions.isEmpty
           ? Column(
               children: <Widget>[
@@ -30,11 +31,28 @@ class TransactionList extends StatelessWidget {
           : ListView.builder(
               itemCount: transactions.length,
               itemBuilder: (ctx, index) {
-                return ListTile(
-                  title: Text('\$${transactions[index].item}'),
-                  leading: CircleAvatar(
-                    child: Text('${transactions[index].amount}'),
-                    radius: 30,
+                return Card(
+                  elevation: 5.0,
+                  margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: ListTile(
+                      trailing: IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () {
+                          delete(transactions[index].id);
+                        },
+                        color: Theme.of(context).errorColor,
+                      ),
+                      title: Text('${transactions[index].item}'),
+                      subtitle: Text(
+                          DateFormat.yMMMd().format(transactions[index].date)),
+                      leading: CircleAvatar(
+                        child: FittedBox(
+                            child: Text('\$${transactions[index].amount}')),
+                        radius: 30,
+                      ),
+                    ),
                   ),
                 );
               },
