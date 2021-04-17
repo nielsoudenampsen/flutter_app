@@ -9,9 +9,9 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 450,
-      child: transactions.isEmpty
+    final mediaQuery = MediaQuery.of(context);
+    return LayoutBuilder(builder: (ctx, constraint) {
+      return transactions.isEmpty
           ? Column(
               children: <Widget>[
                 Text("Nog geen transacties toegevoegd!",
@@ -20,7 +20,7 @@ class TransactionList extends StatelessWidget {
                   height: 10,
                 ),
                 Container(
-                  height: 200,
+                  height: constraint.maxHeight * 0.4,
                   child: Image.asset(
                     'assets/images/waiting.png',
                     fit: BoxFit.cover,
@@ -37,13 +37,22 @@ class TransactionList extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: ListTile(
-                      trailing: IconButton(
-                        icon: Icon(Icons.delete),
-                        onPressed: () {
-                          delete(transactions[index].id);
-                        },
-                        color: Theme.of(context).errorColor,
-                      ),
+                      trailing: mediaQuery.size.width > 450
+                          ? FlatButton.icon(
+                              label: Text('Delete'),
+                              icon: Icon(Icons.delete),
+                              onPressed: () {
+                                delete(transactions[index].id);
+                              },
+                              textColor: Theme.of(context).errorColor,
+                            )
+                          : IconButton(
+                              icon: Icon(Icons.delete),
+                              onPressed: () {
+                                delete(transactions[index].id);
+                              },
+                              color: Theme.of(context).errorColor,
+                            ),
                       title: Text('${transactions[index].item}'),
                       subtitle: Text(
                           DateFormat.yMMMd().format(transactions[index].date)),
@@ -56,7 +65,7 @@ class TransactionList extends StatelessWidget {
                   ),
                 );
               },
-            ),
-    );
+            );
+    });
   }
 }
